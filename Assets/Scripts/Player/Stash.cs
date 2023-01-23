@@ -9,20 +9,20 @@ public class Stash : MonoBehaviour
     public int collectedCount => collectedMetals.Count;
     public float collectionHeight = 1;
     public int maxStashableCount = 5;
-
+    public float stashSpeed;
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
     }
 
     public void addStash(Collectable collectable)
     {
-        if(collectedCount >= maxStashableCount)
+        if (collectedCount >= maxStashableCount)
         {
             return;
         }
@@ -31,7 +31,7 @@ public class Stash : MonoBehaviour
 
         var yLocalPosition = collectedCount * collectionHeight;
 
-        collectedStashable.editLocation(stashParent, yLocalPosition, onCompleteCollect);
+        collectedStashable.addStash(stashParent, yLocalPosition, onCompleteCollect, stashSpeed);
         collectedMetals.Add(collectedStashable);
     }
 
@@ -42,7 +42,7 @@ public class Stash : MonoBehaviour
 
     public Stashable removeStash()
     {
-        if(collectedCount <= 0)
+        if (collectedCount <= 0)
         {
             return null;
         }

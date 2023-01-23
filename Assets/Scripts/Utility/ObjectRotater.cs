@@ -12,8 +12,8 @@ public class ObjectRotater : MonoBehaviour
     private void Start()
     {
         if (startRandomRotation)
-        {
-            transform.Rotate(rotateAxis * speed * Random.Range(0f, 100f));
+        { 
+            transform.Rotate(rotateAxis * speed * Random.Range(0f,100f));
         }
     }
 

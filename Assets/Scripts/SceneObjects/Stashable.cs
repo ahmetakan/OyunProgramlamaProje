@@ -9,7 +9,7 @@ public class Stashable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,10 +18,10 @@ public class Stashable : MonoBehaviour
 
     }
 
-    public void editLocation(Transform stashParent, float yLocalPosition, Action onCompleteCollect)
+    public void addStash(Transform stashParent, float yLocalPosition, Action onCompleteCollect, float stashSpeed)
     {
-        float completionRadius = 0.5f;
-        Tweener tweener =  transform.DOMove(stashParent.position, 30f).SetSpeedBased(true);
+        float completionRadius = 0.8f;
+        Tweener tweener = transform.DOMove(stashParent.position, stashSpeed).SetSpeedBased(true);
         var targetPos = stashParent.position + Vector3.up * yLocalPosition;
         float distance;
 

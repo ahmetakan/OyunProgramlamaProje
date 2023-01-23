@@ -5,54 +5,46 @@ using UnityEngine;
 
 public class Unlockable : MonoBehaviour
 {
-    public int vehiclePrice;
-    public int paidMetalCount = 0;
-    public string unlockableName;
-
+    public UnlockData unlockableData;
     public TextMeshPro name;
     public TextMeshPro price;
-
-    private int remainingPrice => vehiclePrice - paidMetalCount;
-
-    public List<GameObject> unlockableAreas = new List<GameObject>();
+    public List<GameObject> objectsToUnlock = new List<GameObject>();
 
     private void OnEnable()
     {
-        unlockableAreas.ForEach(unlockable =>
-        {
-            unlockable.SetActive(false);
-        });
+        checkUnlocked();
     }
-
-    public void Start()
+    void Start()
     {
-        name.text = unlockableName;
-        price.text = remainingPrice.ToString();
+        objectsToUnlock.ForEach((x) => x.SetActive(false));
+        name.text = "UNLOCK " + unlockableData.unlockableName.ToUpper();
+        price.text = unlockableData.RemainingPrice.ToString();
     }
     private void paymentCompleted()
     {
-        price.text = remainingPrice.ToString();
+        price.text = unlockableData.RemainingPrice.ToString();
         checkUnlocked();
     }
     private void checkUnlocked()
     {
-        if (paidMetalCount < vehiclePrice)
+        if (unlockableData.RemainingPrice <= 0)
         {
-            return;
+            objectsToUnlock.ForEach((unlockable) =>
+            {
+                unlockable.transform.parent = null;
+                unlockable.SetActive(true);
+            });
+
+            gameObject.SetActive(false);
         }
-
-        unlockableAreas.ForEach(unlockable =>
-        {
-            unlockable.transform.parent = null;
-            unlockable.SetActive(true);
-        });
-
-        gameObject.SetActive(false);
     }
 
     public void pay(Stashable stashable)
     {
-        paidMetalCount++;
+        if (unlockableData.RemainingPrice <= 0)
+            return;
+
+        unlockableData.CollectedPrice++;
         
         stashable.remove(transform, paymentCompleted);
     }

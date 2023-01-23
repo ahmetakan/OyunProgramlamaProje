@@ -6,30 +6,10 @@ using UnityEngine.UI;
 public class Rideable : MonoBehaviour
 {
     private bool isInCar = false;
-
+    private CarController controller;
     public Button enterButton;
     public Button exitButton;
     public Button holdBrakeButton;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //public void showHideButton()
-    //{
-    //    if (!isPressed)
-    //    {
-
-    //    }
-    //}
 
     public void showEnterButton()
     {
@@ -38,7 +18,6 @@ public class Rideable : MonoBehaviour
             return;
         }
 
-        //enterButton.onClick.AddListener(() => enterVehicle(player: player));
         enterButton.gameObject.SetActive(true);
     }
 
@@ -51,11 +30,9 @@ public class Rideable : MonoBehaviour
 
     public void enterVehicle(GameObject player)
     {
-        //if (isPressed)
-        //{
-        //    return;
-        //}
-        //enterButton.onClick.AddListener(() => enterVehicle(player: player));
+        controller = GetComponent<CarController>();
+        controller.enabled = true;
+
         player.transform.parent = gameObject.transform;
         player.transform.position = gameObject.transform.position;
         
@@ -72,15 +49,12 @@ public class Rideable : MonoBehaviour
 
     public void exitVehicle(GameObject player)
     {
-        //if (isPressed)
-        //{
-        //    return;
-        //}
+        controller = GetComponent<CarController>();
+        controller.enabled = false;
 
         Vector3 vehiclePosition = gameObject.transform.position;
         Vector3 previousPlayerPosition = player.transform.position;
 
-        //exitButton.onClick.AddListener(() => exitVehicle(player: player));
         player.transform.parent = null;
         player.transform.position = new Vector3(vehiclePosition.x - 12, 0, vehiclePosition.z);
 
@@ -90,9 +64,4 @@ public class Rideable : MonoBehaviour
 
         hideBothButtons();
     }
-
-    //public void setHoldBrakeButton()
-    //{
-    //    holdBrakeButton.OnPointerUp();
-    //}
 }

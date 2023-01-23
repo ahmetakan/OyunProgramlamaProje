@@ -40,20 +40,20 @@ public class CarController : MonoBehaviour
 
     private void GetInput()
     {
-        //if (joystick == null)
-        //    return;
+        if (joystick == null)
+            return;
 
-        //Vector2 direction = joystick.Direction;
+        Vector2 direction = joystick.Direction;
 
-        //Vector3 movementVector = new Vector3(direction.x, 0, direction.y);
+        Vector3 movementVector = new Vector3(direction.x, 0, direction.y);
 
-        //movementVector = movementVector * Time.deltaTime * speed;
+        movementVector = movementVector * Time.deltaTime * speed;
 
-        //horizontalInput = direction.x;
-        //verticalInput = direction.y * speed;
+        horizontalInput = direction.x;
+        verticalInput = direction.y * speed;
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        //horizontalInput = Input.GetAxis("Horizontal");
+        //verticalInput = Input.GetAxis("Vertical");
     }
 
     private void HandleSteering()
@@ -68,7 +68,7 @@ public class CarController : MonoBehaviour
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
         frontRightWheelCollider.motorTorque = verticalInput * motorForce;
 
-        brakeForce = isBreaking ? 150000f : 0f;
+        brakeForce = isBreaking ? 200000f : 0f;
         ApplyBraking();
     }
 

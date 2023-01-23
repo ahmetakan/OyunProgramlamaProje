@@ -46,8 +46,6 @@ public class GetInAndOut : MonoBehaviour
                 rideable.showEnterButton();
                 enterButton.onClick.AddListener(() => rideable.enterVehicle(gameObject));
                 exitButton.onClick.AddListener(() => rideable.exitVehicle(gameObject));
-                //holdBrakeButton.OnPointerUp(rideable.)
-                //rideable.enterVehicle(gameObject);
             }
         }
     }
@@ -59,10 +57,7 @@ public class GetInAndOut : MonoBehaviour
             if (other.TryGetComponent(out Rideable rideable))
             {
                 rideable.hideBothButtons();
-                //rideable.enterVehicle(gameObject);
             }
         }
     }
-
-    public void aaa() { }
 }

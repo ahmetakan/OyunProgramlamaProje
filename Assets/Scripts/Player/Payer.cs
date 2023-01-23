@@ -16,7 +16,7 @@ public class Payer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +26,7 @@ public class Payer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(payDelay >= Time.time)
+        if (payDelay >= Time.time)
         {
             return;
         }
@@ -44,7 +44,7 @@ public class Payer : MonoBehaviour
                 }
 
                 unlockableArea.pay(removableStashable);
-                payDelay = Time.time + 0.5f;
+                payDelay = Time.time + 0.3f;
             }
         }
     }

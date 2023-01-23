@@ -43,10 +43,10 @@ public class CollectableSpawnArea : MonoBehaviour
 
     }
 
-    void spawnCollectable()
+    void spawnCollectable() 
     {
         Vector2 xyPositions = Random.insideUnitCircle;
-        Vector3 generatedPosition = new Vector3(xyPositions.x, 0, xyPositions.y) * 10f;
+        Vector3 generatedPosition = new Vector3(xyPositions.x, 0, xyPositions.y) * 22f;
         generatedPosition += transform.position;
 
         Collectable _collectable = Instantiate(collectable, null);
